@@ -6,17 +6,17 @@
     label-width="100px"
     class="loginForm sign-in-form"
   >
-    <el-form-item label="邮箱" prop="email">
+    <el-form-item label="用户名" prop="email">
       <el-input
-        v-model="loginUser.email"
-        placeholder="Enter Email..."
+        v-model="loginUser.account"
+        placeholder="请输入用户名"
       ></el-input>
     </el-form-item>
     <el-form-item label="密码" prop="password">
       <el-input
         v-model="loginUser.password"
         type="password"
-        placeholder="Enter Password..."
+        placeholder="请输入密码"
       ></el-input>
     </el-form-item>
 
@@ -25,7 +25,7 @@
         @click="handleLogin()"
         type="primary"
         class="submit-btn"
-        >提交</el-button
+        >登录</el-button
       >
     </el-form-item>
 
@@ -35,12 +35,11 @@
     </div>
   </el-form>
 </template>
-
 <script lang="ts">
 import {login} from "@/api/login";
-import { useRouter } from 'vue-router'
-import {  reactive } from "vue";
-export default  {
+import { useRouter } from 'vue-router';
+import md5 from 'js-md5'
+export default   {
   props: {
     loginUser: {
       type: Object,
@@ -51,27 +50,19 @@ export default  {
       required: true,
     },
   },
-  setup(){
+  setup(props:any,context:any){
     const router = useRouter();
-    const loginForm = reactive({
-      account: '',
-      password:''
-    })
+
     const handleLogin  = (e: Event)=> {
-      const param =  {
-        account: loginForm.account,
-        password: loginForm.password
+      let param = {
+        account:props.loginUser.account,
+        password:md5(props.loginUser.password)
       }
-      login(param).then(response => {
-        const res: any = response.data
-        if(res.code === 200){
-          localStorage.setItem('ACCESS_TOKEN', res.data);
-          router.push("/flow")
-        }
+      login(param).then(res => {
+        if(res.status === 200)router.push("/home")
       })
     }
     return{
-      loginForm,
       handleLogin
     }
   }
@@ -88,7 +79,7 @@ export default  {
 }
 
 .submit-btn {
-  width: 100%;
+  /*width: 100%;*/
 }
 .tiparea {
   text-align: right;

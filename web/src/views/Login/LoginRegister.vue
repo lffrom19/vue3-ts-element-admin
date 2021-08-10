@@ -262,7 +262,7 @@ export default {
     height: 100vh;
   }
   .signin-signup {
-    width: 100%;
+    width: 60%;
     top: 95%;
     transform: translate(-50%, -100%);
     transition: 1s 0.8s ease-in-out;

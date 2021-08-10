@@ -1,10 +1,11 @@
 import { Request } from '@/http';
 
 
-export function login (parameter: any)  {
+export function login (params: any)  {
     return Request.axiosInstance({
-        url: '/cxLogin',
+        url: '/api/login',
         method: 'post',
-        data: parameter
+        data: params
     })
 }
+

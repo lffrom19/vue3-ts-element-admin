@@ -3,7 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
   {
-    path: '/index',
+    path: '/home',
     name: 'Home',
     component: () => import('../views/Home.vue')
   },
@@ -15,7 +15,7 @@ const routes = [
   {
     path: '/:catchAll(.*)',
     name: '/404',
-    component: () => import('../views/404.vue')
+    component: () => import('../views/404/404.vue')
   }
 ]
 

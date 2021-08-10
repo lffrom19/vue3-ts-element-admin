@@ -1,17 +1,17 @@
 import { ref } from "vue";
 
 interface User {
-  email: string;
+  account: string;
   password: string;
 }
 
 export const loginUser = ref<User>({
-  email: "",
+  account: "",
   password: "",
 });
 
 interface Rules {
-  email: {
+  account: {
     type: string;
     message: string;
     required: boolean;
@@ -34,10 +34,10 @@ interface Rules {
 
 // 校验规则
 export const rules = ref<Rules>({
-  email: [
+  account: [
     {
       type: "email",
-      message: "Email is incorrect...",
+      message: "用户名不正确...",
       required: true,
       trigger: "blur",
     },
@@ -45,13 +45,13 @@ export const rules = ref<Rules>({
   password: [
     {
       required: true,
-      message: "Password could not be empty...",
+      message: "密码为必填项...",
       trigger: "blur",
     },
     {
       min: 6,
       max: 30,
-      message: "Password's length has to be 6 to 30 characters...",
+      message: "密码长度必须在6-30之间...",
       trigger: "blur",
     },
   ],
